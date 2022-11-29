@@ -15,9 +15,9 @@ services:
     container_name: fullnode
     hostname: fullnode
     restart: unless-stopped
-    ports:
-      - 127.0.0.1:9000:9000
-      - 127.0.0.1:9184:9184
+    expose:
+      - 9000
+      - 9184
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
