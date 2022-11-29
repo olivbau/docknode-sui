@@ -43,7 +43,7 @@ ufw enable
 
 4. Run
 ```bash
-curl -o ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/devnet/genesis.blob
+wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/devnet/genesis.blob
 docker compose up -d --pull always
 docker logs -f fullnode --since 1m
 docker compose down
