@@ -1,0 +1,20 @@
+{$HOST} {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy fullnode:9000
+}
+
+{$HOST}:9101 {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy nodeexporter:9100
+}
+
+{$HOST}:9102 {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy fullnode:9184
+}

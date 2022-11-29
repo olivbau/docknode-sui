@@ -1,0 +1,65 @@
+version: "3.8"
+
+networks:
+  docknode-sui:
+    driver: bridge
+
+volumes:
+  fullnode_data: {}
+  caddy_data: {}
+  caddy_config: {}
+
+services:
+  fullnode:
+    image: "mysten/sui-node:stable"
+    container_name: fullnode
+    hostname: fullnode
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:9000:9000
+      - 127.0.0.1:9184:9184
+    volumes:
+      - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
+      - ./sui/genesis.blob:/sui/genesis.blob:ro
+      - fullnode_data:/sui/suidb
+    command: /usr/local/bin/sui-node --config-path fullnode.yaml
+    networks:
+      - docknode-sui
+
+  nodeexporter:
+    image: prom/node-exporter:v1.4.0
+    container_name: nodeexporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    networks:
+      - docknode-sui
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    depends_on:
+      - fullnode
+    ports:
+      - 80:80
+      - 443:443
+      - 9101:9101
+      - 9102:9102
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - BASIC_AUTH_USERS=${BASIC_AUTH_USERS:?err}
+      - HOST=${HOST:?err}
+    networks:
+      - docknode-sui
