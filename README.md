@@ -37,9 +37,7 @@ nano .env
 3. Setup UFW
 ```bash
 ufw allow ssh
-ufw deny 9000
-ufw deny 9100
-ufw deny 9184
+ufw deny 9000 && ufw deny 9100 && ufw deny 9184
 ufw enable
 ```
 
