@@ -5,3 +5,6 @@
 
 # .env file
 .env
+
+# genesis.blob file
+genesis.blob
