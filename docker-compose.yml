@@ -5,30 +5,29 @@ networks:
     driver: bridge
 
 volumes:
-  fullnode_data: {}
-  caddy_data: {}
-  caddy_config: {}
+  caddy_data:
+  caddy_config:
+  fullnode_data:
 
 services:
   fullnode:
-    image: "mysten/sui-node:stable"
-    container_name: fullnode
-    hostname: fullnode
+    image: "mysten/sui-node:testnet"
     restart: unless-stopped
     expose:
       - 9000
       - 9184
+    ports:
+    - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
-      - fullnode_data:/sui/suidb
-    command: /usr/local/bin/sui-node --config-path fullnode.yaml
+      - fullnode_data:/sui/suidb:rw
+    command: ["/usr/local/bin/sui-node", "--config-path", "fullnode.yaml"]
     networks:
       - docknode-sui
 
   nodeexporter:
     image: prom/node-exporter:v1.4.0
-    container_name: nodeexporter
     restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
@@ -46,9 +45,7 @@ services:
 
   caddy:
     image: caddy:2-alpine
-    container_name: caddy
-    depends_on:
-      - fullnode
+    restart: unless-stopped
     ports:
       - 80:80
       - 443:443
@@ -59,7 +56,8 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     environment:
-      - BASIC_AUTH_USERS=${BASIC_AUTH_USERS:?err}
+      - METRICS_USERS=${METRICS_USERS:?err}
+      - RPC_USERS=${RPC_USERS:?err}
       - HOST=${HOST:?err}
     networks:
       - docknode-sui

@@ -11,8 +11,9 @@
 0. VPS config (optional)
 ```bash
 apt update
-apt upgrade
-apt install git
+apt upgrade -y
+apt install -y git
+# apt update && apt upgrade -y && apt install -y git
 # install docker https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 ```
 
@@ -43,9 +44,9 @@ ufw enable
 
 4. Run
 ```bash
-wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/devnet/genesis.blob
+wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/testnet/genesis.blob
 docker compose pull
 docker compose up -d
-docker logs -f fullnode --since 1m
+docker logs -f fullnode --since 5m
 docker compose down
 ```
