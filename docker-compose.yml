@@ -11,7 +11,7 @@ volumes:
 
 services:
   fullnode:
-    image: "mysten/sui-node:testnet"
+    image: "mysten/sui-node:mainnet"
     restart: unless-stopped
     expose:
       - 9000
