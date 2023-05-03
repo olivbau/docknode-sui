@@ -47,6 +47,6 @@ ufw enable
 wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/mainnet/genesis.blob
 docker compose pull
 docker compose up -d
-docker logs -f fullnode --since 5m
+docker logs -f docknode-sui-fullnode-1 --since 5m
 docker compose down
 ```
