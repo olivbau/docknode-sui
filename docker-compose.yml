@@ -17,7 +17,7 @@ services:
       - 9000
       - 9184
     ports:
-    - "8084:8084/udp"
+      - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
