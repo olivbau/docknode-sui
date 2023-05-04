@@ -17,6 +17,7 @@ services:
       - 9000
       - 9184
     ports:
+      - "8080:8080"
       - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
