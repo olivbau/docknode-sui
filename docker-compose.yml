@@ -13,11 +13,10 @@ services:
   fullnode:
     image: "mysten/sui-node:mainnet"
     restart: unless-stopped
-    expose:
-      - 9000
-      - 9184
     ports:
       - "8080:8080"
+      - "9184:9184"
+      - "9000:9000"
       - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
