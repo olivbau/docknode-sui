@@ -11,7 +11,7 @@ volumes:
 
 services:
   fullnode:
-    image: "mysten/sui-node:mainnet"
+    image: "mysten/sui-node:stable"
     restart: unless-stopped
     ports:
       - "8080:8080"
