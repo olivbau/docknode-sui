@@ -2,13 +2,13 @@
 
 ## Metrics
 
-* `https://yourdomain.com:9101/metrics`
-* `https://yourdomain.com:9102/metrics`
+- `https://yourdomain.com:9101/metrics`
+- `https://yourdomain.com:9102/metrics`
 
-
-## Install 
+## Install
 
 0. VPS config (optional)
+
 ```bash
 apt update
 apt upgrade -y
@@ -18,12 +18,14 @@ apt install -y git
 ```
 
 1. Clone the repository and
+
 ```bash
 git clone https://github.com/olivbau/docknode-sui.git
 cd docknode-sui
 ```
 
 2. Configure environement variables
+
 ```bash
 cp .env.example .env
 
@@ -36,6 +38,7 @@ nano .env
 ```
 
 3. Setup UFW
+
 ```bash
 ufw allow ssh
 ufw deny 9000 && ufw deny 9100 && ufw deny 9184
@@ -43,6 +46,7 @@ ufw enable
 ```
 
 4. Run
+
 ```bash
 wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/mainnet/genesis.blob
 docker compose pull
