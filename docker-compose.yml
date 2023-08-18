@@ -20,9 +20,7 @@ services:
       - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
-      - ./sui/fullnode.yaml:/opt/sui/config/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
-      - ./sui/genesis.blob:/opt/sui/config/genesis.blob:ro
       - fullnode_data:/sui/suidb:rw
     command:
       [
