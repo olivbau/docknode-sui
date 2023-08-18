@@ -11,7 +11,7 @@ volumes:
 
 services:
   fullnode:
-    image: "mysten/sui-node:stable"
+    image: "mysten/sui-node:mainnet"
     restart: unless-stopped
     ports:
       - "8080:8080"
@@ -20,9 +20,16 @@ services:
       - "8084:8084/udp"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
+      - ./sui/fullnode.yaml:/opt/sui/config/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
+      - ./sui/genesis.blob:/opt/sui/config/genesis.blob:ro
       - fullnode_data:/sui/suidb:rw
-    command: ["/usr/local/bin/sui-node", "--config-path", "fullnode.yaml"]
+    command:
+      [
+        "/opt/sui/bin/sui-node",
+        "--config-path",
+        "/opt/sui/config/fullnode.yaml",
+      ]
     networks:
       - docknode-sui
 
