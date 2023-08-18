@@ -11,15 +11,6 @@ genesis:
   # Update this to the location of where the genesis file is stored
   genesis-file-location: "genesis.blob"
 
-authority-store-pruning-config:
-  num-latest-epoch-dbs-to-retain: 3
-  epoch-db-pruning-period-secs: 3600
-  num-epochs-to-retain: 1
-  max-checkpoints-in-batch: 10
-  use-range-deletion: true
-  max-transactions-in-batch: 1000
-  pruning-run-delay-seconds: 60
-
 p2p-config:
   seed-peers:
     - address: /dns/icn-00.mainnet.sui.io/udp/8084
