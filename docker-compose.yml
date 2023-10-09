@@ -17,7 +17,7 @@ services:
       - "8080:8080"
       - "9184:9184"
       - "9000:9000"
-      - "8084:8084/udp"
+      - "8084:8084"
     volumes:
       - ./sui/fullnode.yaml:/sui/fullnode.yaml:ro
       - ./sui/genesis.blob:/sui/genesis.blob:ro
