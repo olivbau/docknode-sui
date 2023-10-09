@@ -12,8 +12,8 @@
 ```bash
 apt update
 apt upgrade -y
-apt install -y git awscli
-# apt update && apt upgrade -y && apt install -y git awscli
+apt install -y git
+# apt update && apt upgrade -y && apt install -y git
 # install docker https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 ```
 
@@ -45,11 +45,20 @@ ufw deny 9000 && ufw deny 9100 && ufw deny 9184
 ufw enable
 ```
 
-4. Run
+4. Download snapshot (optional)
+
+```bash
+apt update
+apt install -y awscli
+
+# Replace XXX by the current epoch - 1
+aws s3 cp s3://mysten-mainnet-snapshots/epoch_XXX ./sui/db/live --recursive --no-sign-request
+```
+
+5. Run
 
 ```bash
 wget -O ./sui/genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/mainnet/genesis.blob
-aws s3 cp s3://mysten-mainnet-snapshots/epoch_177 ./sui/db/live --recursive --no-sign-request
 
 docker compose pull
 docker compose up -d
