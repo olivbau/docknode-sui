@@ -8,3 +8,6 @@
 
 # genesis.blob file
 genesis.blob
+
+sui/db/*
+!sui/db/.gitkeep
