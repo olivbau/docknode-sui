@@ -12,8 +12,8 @@
 ```bash
 apt update
 apt upgrade -y
-apt install -y git
-# apt update && apt upgrade -y && apt install -y git
+apt install -y git screen
+# apt update && apt upgrade -y && apt install -y git screen
 # install docker https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 ```
 
@@ -40,8 +40,7 @@ nano .env
 3. Setup UFW
 
 ```bash
-ufw allow ssh
-ufw deny 9000 && ufw deny 9100 && ufw deny 9184
+ufw allow ssh && ufw deny 9000 && ufw deny 9100 && ufw deny 9184
 ufw enable
 ```
 
@@ -51,7 +50,9 @@ ufw enable
 apt update
 apt install -y awscli
 
+screen -R snapshot
 # Replace XXX by the current epoch - 1
+# https://suiexplorer.com/
 aws s3 cp s3://mysten-mainnet-snapshots/epoch_XXX ./sui/db/live --recursive --no-sign-request
 ```
 
