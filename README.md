@@ -47,6 +47,8 @@ ufw enable
 4. Download snapshot (optional)
 
 ```bash
+# docker run --rm --volume ./sui/genesis.blob:/genesis.blob:ro --volume ./sui/db:/tmp:rw mysten/sui-tools:mainnet /usr/local/bin/sui-tool download-db-snapshot --formal --epoch 249 --snapshot-bucket mysten-mainnet-formal --snapshot-bucket-type gcs --num-parallel-downloads 50 --genesis /genesis.blob --network mainnet --path /tmp --no-sign-request
+
 apt update
 apt install -y awscli
 
