@@ -1,5 +1,7 @@
 {$HOST} {
-
+        basicauth /* {
+                {$RPC_USERS}
+        }
         reverse_proxy fullnode:9000
 }
 
